@@ -1,0 +1,9 @@
+[
+	{
+		"args":
+		{
+			"characters": "__import__('pudb').set_trace()"
+		},
+		"command": "insert"
+	}
+]

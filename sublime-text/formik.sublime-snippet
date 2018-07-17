@@ -1,0 +1,55 @@
+<snippet>
+    <content><![CDATA[
+import { withFormik } from 'formik';
+import * as yup from 'yup';
+import { FormField } from 'jsx/form_utils'
+
+class ContactForm extends React.Component {
+  _form = () => {
+    const InnerForm = props => {
+
+      return <form className="contactForm" onSubmit={props.handleSubmit}>
+        <div className={"flex flex-wrap"}>
+          <FormField
+            classNames="w-full"
+            formProps={props}
+            fieldName='name'
+            label='Name'
+            type='textarea'
+            placeholder="Your name"
+          />
+        </div>
+
+        <button className="" type="submit" disabled={props.isSubmitting}>
+          Submit
+        </button>
+      </form>
+    }
+
+    const EnhancedForm = withFormik({
+      mapPropsToValues: () => ({ name: '' }),
+      validationSchema: yup.object().shape({
+        name: yup.string()
+          .required('This field is required'),
+      }),
+      handleSubmit: (values, { setSubmitting }) => {
+        api.submitContactForm(
+          values
+        );
+      },
+      displayName: 'BasicForm', // helps with React DevTools
+    })(InnerForm);
+
+    return <EnhancedForm/>;
+  }
+
+  render() {
+    return this._form();
+  }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>formik</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.javascript</scope> -->
+</snippet>
