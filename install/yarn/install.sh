@@ -1,0 +1,1 @@
+yarn global add prettier typescript prettier-plugin-organize-imports
